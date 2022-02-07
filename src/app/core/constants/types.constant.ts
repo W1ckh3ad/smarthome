@@ -1,0 +1,18 @@
+export const types = [
+  'Lampe',
+  'Kühlschrank',
+  'Waschmaschine',
+  'Steckdose',
+  'Schalter',
+  'Knöpfe',
+  'Thermostat',
+  'Stromzähler',
+  'Bewegungsmelder',
+  'Kameras',
+  'Schließkontakte',
+  'Fernseher',
+  'Türklingel',
+  'Steuerungseinheiten',
+  "Bewässerung",
+  'Sonstiges',
+];
