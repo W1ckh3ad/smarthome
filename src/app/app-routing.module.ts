@@ -4,8 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: '/devices',
+    loadChildren: () =>
+      import('./features/start/start.module').then((m) => m.StartPageModule),
   },
   {
     path: 'devices',
@@ -16,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'start',
-    loadChildren: () => import('./features/start/start.module').then( m => m.StartPageModule)
+    loadChildren: () =>
+      import('./features/start/start.module').then((m) => m.StartPageModule),
   },
 ];
 @NgModule({

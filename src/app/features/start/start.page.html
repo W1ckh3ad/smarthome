@@ -1,9 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>start</ion-title>
+    <ion-title>Smarthome</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-spinner *ngIf="visible"></ion-spinner>
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-direction: column;
+      min-height: 80vh;
+    "
+  >
+    <ng-container *ngIf="visible === 'loading'">
+      <ion-spinner style="height: 3em; width: 3em"></ion-spinner>
+      <p>App wird geladen</p>
+    </ng-container>
+    <ng-container *ngIf="visible === 'tooltip'">
+      <h1>Einrichten</h1>
+      <p>
+        Vergewissern Sie sich, dass alle Geräte sich im WLAN befinden und
+        Bluetooth aktiviert ist.
+      </p>
+      <ion-button expand="block" (click)="gotoRegisterPod()"
+        >Alle Geräte sind im WLAN</ion-button
+      >
+      <ion-button color="secondary" expand="block" (click)="gotoLoading()"
+        >Erneut Laden</ion-button
+      >
+    </ng-container>
+
+    <ng-container *ngIf="visible === 'registerpod'">
+      <ion-list style="width: 100%">
+        <ion-list-header color="primary">
+          <ion-label> Folgende Smarthome Hubs wurden gefunden </ion-label>
+        </ion-list-header>
+        <ion-list-header>
+          <ion-label>
+            Wählen Sie das Gerät, welches der Hub für Ihre Geräte werden soll.
+          </ion-label>
+        </ion-list-header>
+        <ion-item-divider>
+          <ion-label>Geräte</ion-label>
+        </ion-item-divider>
+        <ion-item style="cursor: pointer" (click)="selectAppleTv()">
+          <ion-label>Apple TV Gen 4</ion-label>
+          <ion-icon name="add" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </div>
 </ion-content>

@@ -10,6 +10,7 @@
 </ion-header>
 <ion-content>
   <form
+    *ngIf="visible === 'form'"
     #searchForm="ngForm"
     (ngSubmit)="onSubmit()"
     style="
@@ -50,4 +51,41 @@
     </ion-item>
     <ion-button type="submit" expand="block">Hinzufügen</ion-button>
   </form>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      padding: 1rem;
+    "
+    *ngIf="visible === 'loading'"
+  >
+    <ion-spinner style="height: 3em; width: 3em"></ion-spinner>
+    <p>Geräte in der Umgebung werden gesucht</p>
+  </div>
+
+  <ng-container *ngIf="visible === 'select'">
+    <ion-list style="width: 100%">
+      <ion-list-header color="primary">
+        <ion-label> Folgende Smarthome Geräte wurden gefunden </ion-label>
+      </ion-list-header>
+      <ion-list-header>
+        <ion-label>
+          Wählen Sie das Gerät, welches Sie in Ihr Netzwerk aufnehmen wollen.
+        </ion-label>
+      </ion-list-header>
+      <ion-item-divider>
+        <ion-label>Geräte</ion-label>
+      </ion-item-divider>
+      <ion-item
+        *ngFor="let dev of options"
+        style="cursor: pointer"
+        (click)="selectDevice(dev)"
+      >
+        <ion-label>{{ dev.name }} [{{ dev.manufacturer }}]</ion-label>
+        <ion-icon name="add" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ng-container>
 </ion-content>
