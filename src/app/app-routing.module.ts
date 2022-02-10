@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/start/start.module').then((m) => m.StartPageModule),
   },
+  {
+    path: 'regeln',
+    loadChildren: () => import('./features/regeln/regeln.module').then( m => m.RegelnPageModule)
+  },
 ];
 @NgModule({
   imports: [

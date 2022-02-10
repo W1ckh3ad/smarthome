@@ -6,8 +6,13 @@ import { DevicesPage } from './devices.page';
 const routes: Routes = [
   {
     path: '',
-    component: DevicesPage
-  }
+    component: DevicesPage,
+  },
+  {
+    path: ':id',
+    loadChildren: () =>
+      import('./pages/device/device.module').then((m) => m.DevicePageModule),
+  },
 ];
 
 @NgModule({

@@ -9,48 +9,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form
+  <app-device-form
     *ngIf="visible === 'form'"
-    #searchForm="ngForm"
-    (ngSubmit)="onSubmit()"
-    style="
-      display: flex;
-      flex-direction: column;
-      max-width: 460px;
-      margin: 2rem auto;
-      gap: 2rem;
-    "
-  >
-    <ion-item>
-      <ion-label position="floating" floating>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="model.name" name="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" floating>Hersteller</ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="model.manufacturer"
-        name="manufacturer"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" floating>Typ</ion-label>
-      <ion-input type="text" [(ngModel)]="model.type" name="type"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" floating>Raum</ion-label>
-      <ion-input type="text" [(ngModel)]="model.room" name="room"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" floating>Cluster</ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="model.cluster"
-        name="cluster"
-      ></ion-input>
-    </ion-item>
-    <ion-button type="submit" expand="block">Hinzufügen</ion-button>
-  </form>
+    [device]="device"
+    (submit)="onSubmit($event)"
+  ></app-device-form>
   <div
     style="
       display: flex;

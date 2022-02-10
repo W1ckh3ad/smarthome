@@ -1,0 +1,34 @@
+<ng-container *ngIf="device$ | async as device">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/devices"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{device.name}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-list-header color="primary"> Geräte Informationen </ion-list-header>
+
+      <ion-item> <ion-label>Geräte Id </ion-label>{{device.id}} </ion-item>
+
+      <ion-item> <ion-label>Geräte Name </ion-label>{{device.name}} </ion-item>
+
+      <ion-item>
+        <ion-label>Geräte Hersteller </ion-label>{{device.manufacturer}}
+      </ion-item>
+
+      <ion-item> <ion-label>Geräte Typ </ion-label>{{device.type}} </ion-item>
+
+      <ion-item> <ion-label>Geräte Raum </ion-label>{{device.room}} </ion-item>
+
+      <ion-item>
+        <ion-label> Geräte Cluster </ion-label>{{device.cluster}}
+      </ion-item>
+
+      <ion-button></ion-button>
+    </ion-list>
+  </ion-content>
+</ng-container>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Device } from 'src/app/core/models/device.model';
 import { types } from 'src/app/core/constants/types.constant';
 import { DevicesService } from 'src/app/core/services/devices/devices.service';
+import { guid } from 'src/app/core/utils/guid.utils';
 
 type Dev = { name: string; manufacturer: string };
 @Component({
@@ -11,7 +12,7 @@ type Dev = { name: string; manufacturer: string };
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
-  model = new Device('', '', '');
+  device: Device = new Device(guid(), '', '', '');
   types = types;
   visible: 'loading' | 'select' | 'form' = 'loading';
   options: Dev[] = [
@@ -35,11 +36,11 @@ export class AddComponent implements OnInit {
     }, 1200);
   }
 
-  async onSubmit() {
-    this.deviceService.add(this.model);
+  async onSubmit(device: Device) {
+    this.deviceService.add(device);
     const toast = await this.toastController.create({
       header: 'Gerät wurde erfolgreich hinzugefügt',
-      message: `${this.model.name} wurde erfolgreich eingerichtet!`,
+      message: `${device.name} wurde erfolgreich eingerichtet!`,
       duration: 2500,
     });
     await toast.present();
@@ -55,7 +56,7 @@ export class AddComponent implements OnInit {
   }
 
   async selectDevice({ name, manufacturer }: Dev) {
-    this.model = new Device(name, manufacturer, '');
+    this.device = new Device(guid(), name, manufacturer, '');
     this.visible = 'form';
   }
 }

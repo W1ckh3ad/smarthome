@@ -1,0 +1,16 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Gerät bearbeiten</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"
+        ><ion-icon name="close" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-device-form
+    [device]="device"
+    (submit)="onSubmit($event)"
+  ></app-device-form>
+</ion-content>

@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Device } from '../../models/device.model';
 import { Storage } from '@capacitor/storage';
+import { guid } from '../../utils/guid.utils';
 const key = 'smarthome_devices';
 
 const def: Device[] = [
@@ -12,6 +13,7 @@ const def: Device[] = [
     type: 'Lampe',
     manufacturer: 'Phillips',
     cluster: 'Flurlampen',
+    id: guid(),
   },
   {
     name: 'Stehlampe Flur',
@@ -19,6 +21,7 @@ const def: Device[] = [
     type: 'Lampe',
     manufacturer: 'Phillips',
     cluster: 'Flurlampen',
+    id: guid(),
   },
   {
     name: 'Kühlschrank',
@@ -26,6 +29,7 @@ const def: Device[] = [
     type: 'Kühlschrank',
     manufacturer: 'Samsung',
     cluster: 'Küchengeräte',
+    id: guid(),
   },
   {
     name: 'Bewegungssensor Eingang',
@@ -33,6 +37,7 @@ const def: Device[] = [
     type: 'Bewegungssensor',
     manufacturer: 'Homematic',
     cluster: 'Sicherheit',
+    id: guid(),
   },
   {
     name: 'Klingel Eingang',
@@ -40,6 +45,7 @@ const def: Device[] = [
     type: 'Klingel',
     manufacturer: 'Ring',
     cluster: 'Sicherheit',
+    id: guid(),
   },
   {
     name: 'Bewässerung',
@@ -47,6 +53,7 @@ const def: Device[] = [
     type: 'Bewässerung',
     manufacturer: 'Gardena',
     cluster: 'Pflanzenbewässerung',
+    id: guid(),
   },
   {
     name: 'Steckdose Anlage',
@@ -54,6 +61,7 @@ const def: Device[] = [
     manufacturer: 'Hama',
     type: 'Steckdose',
     cluster: 'Heimkinoanlage Wohnzimmer',
+    id: guid(),
   },
   {
     name: 'Schalter Anlage',
@@ -61,6 +69,7 @@ const def: Device[] = [
     manufacturer: 'Hama',
     type: 'Schalter',
     cluster: 'Heimkinoanlage Wohnzimmer',
+    id: guid(),
   },
 ];
 
@@ -97,9 +106,29 @@ export class DevicesService {
     this._devices.next(new Set([...this._devices.value, device]));
   }
 
+  edit(device: Device) {
+    const current = [...this._devices.value];
+    const index = current.findIndex((x) => x.id === device.id);
+    if (index === -1) {
+      return;
+    }
+    current.splice(index, 1, device);
+    this._devices.next(new Set(current));
+  }
+
   delete(device: Device) {
     const set = this._devices.value;
     set.delete(device);
     this._devices.next(set);
+  }
+
+  getDevice(id: string) {
+    return [...this._devices.value].find((x) => x.id === id);
+  }
+
+  getDevice$(id: string) {
+    return this._devices.pipe(
+      map((x) => [...this._devices.value].find((x) => x.id === id))
+    );
   }
 }

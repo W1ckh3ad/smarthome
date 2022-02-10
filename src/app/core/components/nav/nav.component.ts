@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadService } from '../../services/load/load.service';
 
 @Component({
   selector: 'app-nav',
@@ -6,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-
-  constructor() { }
+  constructor(public load: LoadService) {}
 
   ngOnInit() {}
-
 }

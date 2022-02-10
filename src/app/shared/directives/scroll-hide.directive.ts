@@ -1,4 +1,10 @@
-import { Directive, ElementRef, Input, Renderer2, SimpleChanges } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
 import { DomController, IonContent } from '@ionic/angular';
 
 export interface ScrollHideConfig {
@@ -7,10 +13,10 @@ export interface ScrollHideConfig {
 }
 
 @Directive({
-  selector: '[appScrollHide]'
+  selector: '[appScrollHide]',
 })
 export class ScrollHideDirective {
-@Input('scrollHide') config: ScrollHideConfig;
+  @Input('scrollHide') config: ScrollHideConfig;
   @Input('scrollContent') scrollContent: IonContent;
 
   contentHeight: number;

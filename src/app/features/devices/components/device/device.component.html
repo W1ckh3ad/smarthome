@@ -1,5 +1,5 @@
 <ion-item-sliding>
-  <ion-item *ngIf="device">
+  <ion-item *ngIf="device" [routerLink]="device.id">
     <ion-label>
       <h2>{{ device.name }} [{{ device.manufacturer }}]</h2>
       <p>{{ device.type }} | {{ device.room }} | {{ device.cluster }}</p>
@@ -7,5 +7,6 @@
   </ion-item>
   <ion-item-options side="end">
     <ion-item-option color="danger" (click)="delete()">Delete</ion-item-option>
+    <ion-item-option (click)="edit()">Bearbeiten</ion-item-option>
   </ion-item-options>
 </ion-item-sliding>

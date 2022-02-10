@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Regel erstellen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form
+    #createForm="ngForm"
+    (ngSubmit)="onSubmit()"
+    style="
+      display: flex;
+      flex-direction: column;
+      max-width: 460px;
+      margin: 2rem auto;
+      gap: 2rem;
+    "
+  >
+    <ion-item>
+      <ion-label position="floating" floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="model.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" floating>Trigger</ion-label>
+      <ion-select type="text" [(ngModel)]="model.trigger" name="manufacturer">
+        <ion-select-option [value]="null" disabled
+          >Select Country</ion-select-option
+        >
+        <ion-select-option
+          *ngFor="let device of deviceSelection"
+          [value]="device.id"
+          >{{ device.name }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" floating>Event</ion-label>
+      <ion-select type="text" [(ngModel)]="model.event" name="type">
+        <ion-select-option [value]="null" disabled
+          >Select Country</ion-select-option
+        >
+        <ion-select-option
+          *ngFor="let device of deviceSelection"
+          [value]="device.id"
+          >{{ device.name }}</ion-select-option
+        ></ion-select
+      >
+    </ion-item>
+    <ion-button type="submit" expand="block">Erstellen</ion-button>
+  </form>
+</ion-content>

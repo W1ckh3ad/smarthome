@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { LoadService } from 'src/app/core/services/load/load.service';
 
 @Component({
   selector: 'app-start',
@@ -12,10 +13,12 @@ export class StartPage implements OnInit {
 
   constructor(
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private load: LoadService
   ) {}
 
   ngOnInit() {
+    this.load.isReady = false;
     setTimeout(() => {
       this.visible = 'tooltip';
     }, 3000);
@@ -40,6 +43,7 @@ export class StartPage implements OnInit {
       duration: 6000,
     });
     await toast.present();
+    this.load.isReady = true;
     this.router.navigateByUrl('/devices');
   }
 }

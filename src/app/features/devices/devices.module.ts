@@ -11,6 +11,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddComponent } from './components/add/add.component';
 import { DeviceComponent } from './components/device/device.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { FormComponent } from './components/form/form.component';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,12 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
     AutoCompleteModule,
   ],
   exports: [SharedModule],
-  declarations: [DevicesPage, AddComponent, DeviceComponent],
+  declarations: [
+    DevicesPage,
+    AddComponent,
+    DeviceComponent,
+    FormComponent,
+    EditComponent,
+  ],
 })
 export class DevicesPageModule {}
