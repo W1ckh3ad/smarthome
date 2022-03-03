@@ -1,0 +1,10 @@
+<ion-header *ngIf="deviceId$ |async as deviceId">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/devices/' +deviceId"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Statistiken</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> </ion-content>

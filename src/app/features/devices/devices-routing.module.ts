@@ -13,6 +13,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/device/device.module').then((m) => m.DevicePageModule),
   },
+  {
+    path: ':id/statistics',
+    loadChildren: () =>
+      import('./pages/statistics/statistics.module').then(
+        (m) => m.StatisticsPageModule
+      ),
+  },
 ];
 
 @NgModule({

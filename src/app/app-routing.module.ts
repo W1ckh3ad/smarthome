@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'regeln',
     loadChildren: () => import('./features/regeln/regeln.module').then( m => m.RegelnPageModule)
   },
+  {
+    path: 'presets',
+    loadChildren: () => import('./features/presets/presets.module').then( m => m.PresetsPageModule)
+  },
 ];
 @NgModule({
   imports: [
