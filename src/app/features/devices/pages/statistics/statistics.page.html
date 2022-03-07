@@ -7,4 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-list>
+    <ion-list-header color="primary"> </ion-list-header>
+
+    <ion-item> <ion-label>Hinzugefügt am</ion-label> 01.01.2020</ion-item>
+
+    <ion-item>
+      <ion-label>Gesamtanzahl von Verwendungen</ion-label> 3250</ion-item
+    >
+    <ion-item> <ion-label>Zuletzt verwendet</ion-label> vor 2 Stunden</ion-item>
+    <ion-item>
+      <ion-label>Letzte fehlermeldung</ion-label> vor 2 Tagen</ion-item
+    >
+
+    <ion-button [routerLink]="['statistics']">Statistiken</ion-button>
+  </ion-list>
+</ion-content>

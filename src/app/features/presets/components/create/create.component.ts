@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Rule } from 'src/app/core/models/rule.model';
+import { Preset } from 'src/app/core/models/preset.model';
 import { DevicesService } from 'src/app/core/services/devices/devices.service';
-import { RulesService } from 'src/app/core/services/rules/rules.service';
+import { PresetService } from 'src/app/core/services/preset/preset.service';
 import { guid } from 'src/app/core/utils/guid.utils';
 import { Create } from './create.model';
 
@@ -12,11 +12,11 @@ import { Create } from './create.model';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
-  @Input() rule: Rule = null;
+  @Input() preset: Preset = null;
   model: Create;
   deviceSelection: { name: string; id: string }[] = [];
   constructor(
-    private ruleService: RulesService,
+    private presetService: PresetService,
     private modalController: ModalController,
     private devicesService: DevicesService
   ) {
@@ -26,27 +26,26 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.rule) {
-      const {
+    if (this.preset) {
+      const { name, id, devices } = this.preset;
+      this.model = new Create(
         name,
         id,
-        trigger: { id: trigger },
-        event: { id: event },
-      } = this.rule;
-      this.model = new Create(name, id, trigger, event);
+        devices.map((x) => x.id)
+      );
     } else {
-      this.model = new Create('', guid(), '', '');
+      this.model = new Create('', guid());
     }
   }
 
   async onSubmit() {
-    const payload = new Rule(
+    const devices = [...this.devicesService.devices.value];
+    const payload = new Preset(
       this.model.name,
       this.model.id,
-      this.devicesService.getDevice(this.model.trigger),
-      this.devicesService.getDevice(this.model.event)
+      this.model.devices.map((id) => devices.find((x) => x.id === id))
     );
-    this.ruleService.addOrEdit(payload);
+    this.presetService.addOrEdit(payload);
     await this.modalController.dismiss();
   }
 }

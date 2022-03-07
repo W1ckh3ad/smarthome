@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Regel erstellen</ion-title>
+    <ion-title>Preset erstellen</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,9 +20,13 @@
       <ion-label position="floating" floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="model.name" name="name"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating" floating>Trigger</ion-label>
-      <ion-select type="text" [(ngModel)]="model.trigger" name="manufacturer">
+    <ion-item *ngFor="let deviceId of model.devices; let i">
+      <ion-label position="floating" floating>Gerät {{ i + 1 }}</ion-label>
+      <ion-select
+        type="text"
+        [(ngModel)]="model.devices[i]"
+        name="manufacturer"
+      >
         <ion-select-option [value]="null" disabled
           >Gerät auswählen</ion-select-option
         >
@@ -33,9 +37,16 @@
         >
       </ion-select>
     </ion-item>
+    <ion-item-divider>
+      <ion-label>Gerät hinzufügen</ion-label>
+    </ion-item-divider>
     <ion-item>
-      <ion-label position="floating" floating>Event</ion-label>
-      <ion-select type="text" [(ngModel)]="model.event" name="type">
+      <ion-label position="floating" floating>Gerät</ion-label>
+      <ion-select
+        type="text"
+        [(ngModel)]="model.devices[model.devices.length]"
+        name="manufacturer"
+      >
         <ion-select-option [value]="null" disabled
           >Gerät auswählen</ion-select-option
         >
@@ -43,8 +54,8 @@
           *ngFor="let device of deviceSelection"
           [value]="device.id"
           >{{ device.name }}</ion-select-option
-        ></ion-select
-      >
+        >
+      </ion-select>
     </ion-item>
     <ion-button type="submit" expand="block">Erstellen</ion-button>
   </form>

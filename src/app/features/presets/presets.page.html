@@ -4,4 +4,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let preset of presets$ | async">
+      <!-- <ion-item-sliding> -->
+      <ion-item-divider>
+        <ion-label> {{preset.name}} </ion-label>
+        <ion-buttons slot="end">
+          <ion-button (click)="edit(preset)"
+            ><ion-icon name="create" slot="icon-only"></ion-icon
+          ></ion-button>
+          <ion-button color="danger" (click)="delete(preset)"
+            ><ion-icon name="trash" slot="icon-only"></ion-icon
+          ></ion-button>
+        </ion-buttons>
+      </ion-item-divider>
+      <ion-item *ngFor="let item of preset.devices">
+        <ion-label> {{item.name}} </ion-label>
+      </ion-item>
+
+      <!-- <ion-item-options side="end">
+        <ion-item-option color="danger">Delete</ion-item-option>
+        <ion-item-option>Bearbeiten</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding> -->
+    </ng-container>
+
+    <ion-button expand="block" (click)="neuesPreset()"
+      >Neue Voreinstellung</ion-button
+    >
+  </ion-list></ion-content
+>
